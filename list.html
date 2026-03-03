@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>게시글 목록</title>
+</head>
+
+<body>
+<h2>📋 게시글 목록</h2>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>번호</th>
+            <th>제목</th>
+            <th>작성자</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- 게시글이 없을 경우 -->
+        <tr th:if="${#lists.isEmpty(list)}">
+            <td colspan="3">등록된 게시글이 없습니다.</td>
+        </tr>
+
+        <!-- 게시글 목록 출력 -->
+        <tr th:each="board : ${list}">
+            <td th:text="${board.id}"></td>
+            <td>
+                <a th:href="@{/Thymeleaf/detail(id=${board.id})}"
+                   th:text="${board.title}"></a>
+            </td>
+            <td th:text="${board.writer}"></td>
+        </tr>
+    </tbody>
+</table>
+
+<br>
+<a href="/Thymeleaf/register">새 글 쓰기</a>
+
+</body>
+</html>
